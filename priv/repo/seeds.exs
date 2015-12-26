@@ -11,5 +11,5 @@
 # and so on) as they will fail if something goes wrong.
 #
 VotingService.Repo.insert!(%VotingService.Talk{title: "Java Concurrency", author: "Joshua Bloh", description: "Boring!", pluses: 0, minuses: 0})
-VotingService.Repo.insert!(%VotingService.Talk{title: "Scala Akka Model", author: "Martin Odersky", description: "Where scala meet actors", pluses: 0, minuses: 0})
-VotingService.Repo.insert!(%VotingService.Talk{title: "Elixir vs RoR", author: "???", description: "Worth checking?", pluses: 0, minuses: 0})
+VotingService.Repo.insert!(%VotingService.Talk{title: "Scala Akka Model", author: "Martin Odersky", description: "Where scala meet actors"})
+VotingService.Repo.insert!(%VotingService.Talk{title: "Elixir vs RoR", author: "???", description: "Worth checking?", pluses: 1})

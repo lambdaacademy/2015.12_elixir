@@ -17,3 +17,13 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Docs: http://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
+
+## Curl examples
+Preload data(3 example talks):
+mix run priv/repo/seeds.exs
+
+Commands:
+curl -v -X PUT -H "Content-Type: application/json" --data @t4.json localhost:4000/api/talks/3
+curl -v -X POST -H "Content-Type: application/json" --data @t4.json localhost:4000/api/talks/
+curl -v -X DELETE -H "Content-Type: application/json" localhost:4000/api/talks/1
+curl -v -H "Content-Type: application/json" localhost:4000/api/talks/ | jq

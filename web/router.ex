@@ -19,10 +19,14 @@ defmodule VotingService.Router do
     get "/", PageController, :index
 
     resources "/talks", TalkController
+
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", VotingService do
-  #   pipe_through :api
-  # end
+  scope "/api", VotingService do
+    pipe_through :api
+
+    resources "/talks", TalkApiController, except: [:new, :edit]
+
+  end
 end
