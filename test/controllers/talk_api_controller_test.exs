@@ -1,7 +1,7 @@
 defmodule VotingService.TalkApiControllerTest do
   use VotingService.ConnCase
 
-  alias VotingService.TalkApi
+  alias VotingService.Talk
   @valid_attrs %{author: "some content", description: "some content", minuses: 42, pluses: 42, title: "some content"}
   @invalid_attrs %{}
 
@@ -15,7 +15,7 @@ defmodule VotingService.TalkApiControllerTest do
   end
 
   test "shows chosen resource", %{conn: conn} do
-    talk_api = Repo.insert! %TalkApi{}
+    talk_api = Repo.insert! %Talk{}
     conn = get conn, talk_api_path(conn, :show, talk_api)
     assert json_response(conn, 200)["data"] == %{"id" => talk_api.id,
       "title" => talk_api.title,
@@ -32,33 +32,33 @@ defmodule VotingService.TalkApiControllerTest do
   end
 
   test "creates and renders resource when data is valid", %{conn: conn} do
-    conn = post conn, talk_api_path(conn, :create), talk_api: @valid_attrs
+    conn = post conn, talk_api_path(conn, :create), talk: @valid_attrs
     assert json_response(conn, 201)["data"]["id"]
-    assert Repo.get_by(TalkApi, @valid_attrs)
+    assert Repo.get_by(Talk, @valid_attrs)
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
-    conn = post conn, talk_api_path(conn, :create), talk_api: @invalid_attrs
+    conn = post conn, talk_api_path(conn, :create), talk: @invalid_attrs
     assert json_response(conn, 422)["errors"] != %{}
   end
 
   test "updates and renders chosen resource when data is valid", %{conn: conn} do
-    talk_api = Repo.insert! %TalkApi{}
-    conn = put conn, talk_api_path(conn, :update, talk_api), talk_api: @valid_attrs
+    talk_api = Repo.insert! %Talk{}
+    conn = put conn, talk_api_path(conn, :update, talk_api), talk: @valid_attrs
     assert json_response(conn, 200)["data"]["id"]
-    assert Repo.get_by(TalkApi, @valid_attrs)
+    assert Repo.get_by(Talk, @valid_attrs)
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
-    talk_api = Repo.insert! %TalkApi{}
-    conn = put conn, talk_api_path(conn, :update, talk_api), talk_api: @invalid_attrs
+    talk_api = Repo.insert! %Talk{}
+    conn = put conn, talk_api_path(conn, :update, talk_api), talk: @invalid_attrs
     assert json_response(conn, 422)["errors"] != %{}
   end
 
   test "deletes chosen resource", %{conn: conn} do
-    talk_api = Repo.insert! %TalkApi{}
+    talk_api = Repo.insert! %Talk{}
     conn = delete conn, talk_api_path(conn, :delete, talk_api)
     assert response(conn, 204)
-    refute Repo.get(TalkApi, talk_api.id)
+    refute Repo.get(Talk, talk_api.id)
   end
 end
