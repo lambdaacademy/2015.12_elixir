@@ -26,7 +26,8 @@ defmodule VotingService.Router do
   scope "/api", VotingService do
     pipe_through :api
 
-    resources "/talks", TalkApiController, except: [:new, :edit]
+    resources "/talks/", TalkApiController, except: [:new, :edit]
 
+    post "/vote/:id", TalkApiController, :vote
   end
 end

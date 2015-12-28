@@ -61,4 +61,17 @@ defmodule VotingService.TalkApiControllerTest do
     assert response(conn, 204)
     refute Repo.get(Talk, talk_api.id)
   end
+
+  test "vote for unknown Talk" do
+    assert_error_sent 404, fn ->
+      post conn, talk_api_path(conn, :vote, "-1")
+    end
+  end
+
+  test "vote for talk increase pluses", %{conn: conn} do
+    talk = Repo.insert! struct(Talk, @valid_attrs)
+    conn = post conn, talk_api_path(conn, :vote, talk.id)
+    assert json_response(conn, 200)["data"]["pluses"] == talk.pluses + 1
+    assert Repo.get(Talk, talk.id).pluses == talk.pluses + 1
+  end
 end

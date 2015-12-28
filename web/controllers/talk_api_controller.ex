@@ -45,6 +45,19 @@ defmodule VotingService.TalkApiController do
     end
   end
 
+  def vote(conn, %{"id" => id}) do
+    talk = Repo.get!(Talk, id)
+    changeset = Talk.changeset(talk, %{pluses: talk.pluses + 1})
+    case Repo.update(changeset) do
+      {:ok, talk_api} ->
+        render(conn, "show.json", talk_api: talk_api)
+      {:error, changeset} ->
+        conn
+        |> put_status(:unprocessable_entity)
+        |> render(VotingService.ChangesetView, "error.json", changeset: changeset)
+    end
+  end
+
   def delete(conn, %{"id" => id}) do
     talk_api = Repo.get!(Talk, id)
 
