@@ -6,6 +6,7 @@ defmodule VotingService.Talk do
     field :author, :string
     field :description, :string
     field :pluses, :integer, default: 0
+    field :zeroes, :integer, default: 0
     field :minuses, :integer, default: 0
 
     timestamps

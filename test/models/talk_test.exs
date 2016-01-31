@@ -3,7 +3,7 @@ defmodule VotingService.TalkTest do
 
   alias VotingService.Talk
 
-  @valid_attrs %{author: "some content", description: "some content", minuses: 42, pluses: 42, title: "some content"}
+  @valid_attrs %{author: "some content", description: "some content", minuses: 42, zeroes: 12, title: "some content"}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
