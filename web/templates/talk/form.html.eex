@@ -30,6 +30,12 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :zeroes, class: "control-label" %>
+    <%= number_input f, :zeroes, class: "form-control" %>
+    <%= error_tag f, :zeroes %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :minuses, class: "control-label" %>
     <%= number_input f, :minuses, class: "form-control" %>
     <%= error_tag f, :minuses %>

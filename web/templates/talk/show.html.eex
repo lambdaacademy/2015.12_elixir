@@ -23,6 +23,11 @@
   </li>
 
   <li>
+    <strong>Zeroes:</strong>
+    <%= @talk.zeroes %>
+  </li>
+
+  <li>
     <strong>Minuses:</strong>
     <%= @talk.minuses %>
   </li>

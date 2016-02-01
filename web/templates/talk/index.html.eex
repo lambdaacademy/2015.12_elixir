@@ -7,6 +7,7 @@
       <th>Author</th>
       <th>Description</th>
       <th>Pluses</th>
+      <th>Zeroes</th>
       <th>Minuses</th>
 
       <th></th>
@@ -19,6 +20,7 @@
       <td><%= talk.author %></td>
       <td><%= talk.description %></td>
       <td><%= talk.pluses %></td>
+      <td><%= talk.zeroes %></td>
       <td><%= talk.minuses %></td>
 
       <td class="text-right">
