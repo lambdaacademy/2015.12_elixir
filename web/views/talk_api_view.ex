@@ -15,6 +15,7 @@ defmodule VotingService.TalkApiView do
       author: talk_api.author,
       description: talk_api.description,
       pluses: talk_api.pluses,
+      zeroes: talk_api.zeroes,
       minuses: talk_api.minuses}
   end
 end
