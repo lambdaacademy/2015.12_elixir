@@ -13,7 +13,7 @@ defmodule VotingService.Talk do
   end
 
   @required_fields ~w(title author description)
-  @optional_fields ~w(pluses minuses)
+  @optional_fields ~w(pluses zeroes minuses)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
