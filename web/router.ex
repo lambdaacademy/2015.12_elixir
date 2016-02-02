@@ -23,9 +23,11 @@ defmodule VotingService.Router do
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", VotingService do
+  scope "/talk_api", VotingService do
     pipe_through :api
 
-    resources "/talks/", TalkApiController, except: [:new, :edit, :create, :delete]
+    get "/index", TalkApiController, :api_index
+    post "/update", TalkApiController, :api_update
+    resources "/", TalkApiController, except: [:new, :edit, :create, :delete, :show]
   end
 end

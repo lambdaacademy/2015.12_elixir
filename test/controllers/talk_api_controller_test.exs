@@ -14,24 +14,6 @@ defmodule VotingService.TalkApiControllerTest do
     assert json_response(conn, 200)["data"] == []
   end
 
-  test "shows chosen resource", %{conn: conn} do
-    talk_api = Repo.insert! %Talk{}
-    conn = get conn, talk_api_path(conn, :show, talk_api)
-    assert json_response(conn, 200)["data"] == %{"id" => talk_api.id,
-      "title" => talk_api.title,
-      "author" => talk_api.author,
-      "description" => talk_api.description,
-      "pluses" => talk_api.pluses,
-      "zeroes" => talk_api.zeroes,
-      "minuses" => talk_api.minuses}
-  end
-
-  test "does not show resource and instead throw error when id is nonexistent", %{conn: conn} do
-    assert_error_sent 404, fn ->
-      get conn, talk_api_path(conn, :show, -1)
-    end
-  end
-
   test "updates and renders chosen resource when data is valid", %{conn: conn} do
     talk_api = Repo.insert! %Talk{}
     conn = put conn, talk_api_path(conn, :update, talk_api), talk: @valid_attrs
@@ -43,5 +25,18 @@ defmodule VotingService.TalkApiControllerTest do
     talk_api = Repo.insert! %Talk{}
     conn = put conn, talk_api_path(conn, :update, talk_api), talk: @invalid_attrs
     assert json_response(conn, 422)["errors"] != %{}
+  end
+
+  test "uses hardcoded update API from previous lambda days", %{conn: conn} do
+    talk = Repo.insert! %Talk{}
+    conn = post conn, "talk_api/update", id: talk.id, minus_votes: 1, zero_votes: 2, plus_votes: 4
+  end
+
+  test "uses hardcoded index API from previous lambda days", %{conn: conn} do
+    talk_api = Repo.insert! %Talk{}
+    conn = put conn, talk_api_path(conn, :update, talk_api), talk: @valid_attrs
+    talks = Repo.all Talk
+    conn = get conn, "talk_api/index"
+    assert json_response(conn, 200)["talks"]
   end
 end

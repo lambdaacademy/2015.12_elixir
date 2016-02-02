@@ -3,16 +3,24 @@ defmodule VotingService.TalkApiController do
 
   alias VotingService.Talk
 
-  plug :scrub_params, "talk" when action in [:create, :update]
+  plug :scrub_params, "talk" when action in [:create]
+
+  def api_index(conn, _params) do
+    talks = Repo.all(Talk)
+    render(conn, "index_api.json", talks: talks)
+  end
 
   def index(conn, _params) do
     talksapi = Repo.all(Talk)
     render(conn, "index.json", talksapi: talksapi)
   end
 
-  def show(conn, %{"id" => id}) do
-    talk_api = Repo.get!(Talk, id)
-    render(conn, "show.json", talk_api: talk_api)
+  def api_update(conn, %{"id" => id, "minus_votes" => minus_votes, "plus_votes" => plus_votes, "zero_votes" => zero_votes}) do
+    conn |>
+      update(%{"id" => id,
+               "talk" => %{"pluses" => plus_votes,
+                          "minuses" => minus_votes,
+                          "zeroes" => zero_votes}})
   end
 
   def update(conn, %{"id" => id, "talk" => talk_params}) do

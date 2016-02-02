@@ -5,6 +5,10 @@ defmodule VotingService.TalkApiView do
     %{data: render_many(talksapi, VotingService.TalkApiView, "talk_api.json")}
   end
 
+  def render("index_api.json", %{talks: talks}) do
+    %{talks: render_many(talks, VotingService.TalkApiView, "talk_api.json")}
+  end
+
   def render("show.json", %{talk_api: talk_api}) do
     %{data: render_one(talk_api, VotingService.TalkApiView, "talk_api.json")}
   end
