@@ -19,8 +19,8 @@ defmodule VotingService.TalkApiController do
     conn |>
       update(%{"id" => id,
                "talk" => %{"pluses" => plus_votes,
-                          "minuses" => minus_votes,
-                          "zeroes" => zero_votes}})
+                           "minuses" => minus_votes,
+                           "zeroes" => zero_votes}})
   end
 
   def update(conn, %{"id" => id, "talk" => talk_params}) do

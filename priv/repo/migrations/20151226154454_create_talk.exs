@@ -9,7 +9,7 @@ defmodule VotingService.Repo.Migrations.CreateTalk do
       add :pluses, :integer
       add :minuses, :integer
 
-      timestamps
+      timestamps()
     end
 
   end

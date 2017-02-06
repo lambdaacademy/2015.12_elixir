@@ -1,5 +1,5 @@
 defmodule VotingService.TalkTest do
-  use VotingService.ModelCase
+  use ExUnit.Case
 
   alias VotingService.Talk
 

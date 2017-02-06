@@ -17,25 +17,26 @@ defmodule VotingService.ConnCase do
 
   using do
     quote do
-      # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
       alias VotingService.Repo
-      import Ecto.Model
-      import Ecto.Query, only: [from: 2]
+      import Ecto.Query
+      import Ecto.Query
 
       import VotingService.Router.Helpers
 
-      # The default endpoint for testing
       @endpoint VotingService.Endpoint
     end
   end
 
   setup tags do
-    unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(VotingService.Repo, [])
-    end
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(VotingService.Repo)
 
-    {:ok, conn: Phoenix.ConnTest.conn()}
+    unless tags[:async] do
+      Ecto.Adapters.SQL.Sandbox.mode(VotingService.Repo, {:shared, self()})
+    end
+    :ok
+
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

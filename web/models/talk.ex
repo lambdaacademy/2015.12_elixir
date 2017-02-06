@@ -9,11 +9,11 @@ defmodule VotingService.Talk do
     field :zeroes, :integer, default: 0
     field :minuses, :integer, default: 0
 
-    timestamps
+    timestamps()
   end
 
-  @required_fields ~w(title author description)
-  @optional_fields ~w(pluses zeroes minuses)
+  @required_fields ~w(title author description)a
+  @optional_fields ~w(pluses zeroes minuses)a
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -21,8 +21,9 @@ defmodule VotingService.Talk do
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
   end
 end
