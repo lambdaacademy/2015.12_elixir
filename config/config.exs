@@ -10,7 +10,7 @@ config :voting_service, VotingService.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "/AEikaAEKA2VjHKyd9Id8uFQVEV4gGp9cuD0D6VZ+6VPwVmXvrsLVfqMqxvvGFzD",
-  render_errors: [accepts: ~w(html json)]
+  render_errors: [accepts: ~w(json)]
 
 # Configures Elixir's Logger
 config :logger, :console,
